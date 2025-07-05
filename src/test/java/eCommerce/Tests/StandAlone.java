@@ -10,8 +10,7 @@ import java.time.Duration;
 
 public class StandAlone {
 
-    @Test
-    public void eCommmerce() throws InterruptedException {
+    public void main(String[] args)  {
         String productName = "zara coat";
         String orderSuccessMsg = "Thankyou for the order.";
         WebDriverManager.chromedriver().setup();
@@ -22,22 +21,16 @@ public class StandAlone {
 
         LandingPage landingPage = new LandingPage(webDriver);
         landingPage.navigateToWebPage();
-        landingPage.loginApplication("piyaasok@gmail.com","test123!");
+        ProductCatalogue productCatalogue = landingPage.loginApplication("piyaasok@gmail.com","test123!");
 
-        ProductCatalogue productCatalogue = new ProductCatalogue(webDriver);
         productCatalogue.getProductList();
-        productCatalogue.addProductToCart(productName);
-
-
-        CartPage cartPage = new CartPage(webDriver);
+        CartPage cartPage = productCatalogue.addProductToCart(productName);
         cartPage.goToCart();
-        cartPage.verifyAndContinueToCheckOut(productName);
 
-        CheckOutPage checkOutPage = new CheckOutPage(webDriver);
+        CheckOutPage checkOutPage = cartPage.verifyAndContinueToCheckOut(productName);
         checkOutPage.enterAddressDetails("india");
-        checkOutPage.submitOrder();
 
-        ConfirmOrderPage  confirmOrderPage= new ConfirmOrderPage(webDriver);
+        ConfirmOrderPage confirmOrderPage = checkOutPage.submitOrder();
         confirmOrderPage.verifyConfirmMessage(orderSuccessMsg);
         webDriver.close();
     }
