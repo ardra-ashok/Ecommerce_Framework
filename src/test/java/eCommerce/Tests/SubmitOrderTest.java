@@ -1,26 +1,23 @@
-package eCommerce;
+package eCommerce.Tests;
 
+import eCommerce.TestComponents.BaseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.pageObjects.*;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.time.Duration;
 
-public class StandAlone {
+public class SubmitOrderTest extends BaseTest {
 
-    public void main(String[] args)  {
+    @Test
+    public void submitOrder() throws IOException {
         String productName = "zara coat";
         String orderSuccessMsg = "Thankyou for the order.";
-        WebDriverManager.chromedriver().setup();
-        WebDriver webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-
-        LandingPage landingPage = new LandingPage(webDriver);
-        landingPage.navigateToWebPage();
+        LandingPage landingPage = launchApplication();
         ProductCatalogue productCatalogue = landingPage.loginApplication("piyaasok@gmail.com","test123!");
 
         productCatalogue.getProductList();
@@ -32,7 +29,6 @@ public class StandAlone {
 
         ConfirmOrderPage confirmOrderPage = checkOutPage.submitOrder();
         confirmOrderPage.verifyConfirmMessage(orderSuccessMsg);
-        webDriver.close();
     }
 
 }
