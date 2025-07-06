@@ -11,7 +11,7 @@ public class ErrorValidationsTest extends BaseTest {
     @Test(groups={"errorHandling"})
     public void LoginErrorValidation()  {
         String productName = "zara coat";
-        landingPage.loginApplication("piyaasok@gmail.com","test12");
+        landingPage.loginApplication("piyaasok@gmail.co","test12");
         Assert.assertEquals("Incorrect email or password.",landingPage.getErrorMessage());
     }
 
@@ -26,4 +26,5 @@ public class ErrorValidationsTest extends BaseTest {
         Boolean match = cartPage.verifyAndContinueToCheckOut("zar coat");
         Assert.assertFalse(match);
     }
+
 }
