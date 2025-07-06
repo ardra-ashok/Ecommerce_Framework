@@ -1,6 +1,7 @@
 package org.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -21,6 +22,11 @@ public class Helpers {
     public void waitForElement(By by,long waitTime){
         WebDriverWait waitForElement = new WebDriverWait(webDriver, Duration.ofSeconds(waitTime));
         waitForElement.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    public void waitForElement(WebElement webElement,long waitTime){
+        WebDriverWait waitForElement = new WebDriverWait(webDriver, Duration.ofSeconds(waitTime));
+        waitForElement.until(ExpectedConditions.visibilityOf(webElement));
     }
 
     public void waitForElementToDisapper(WebElement element,long waitTime){

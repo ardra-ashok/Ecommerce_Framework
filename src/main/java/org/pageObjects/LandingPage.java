@@ -27,13 +27,22 @@ public class LandingPage extends Helpers {
     @FindBy(id="login")
     WebElement submit;
 
-    public void loginApplication(String username, String password){
+    @FindBy(css="[class*='flyInOut']")
+    WebElement errorMessage;
+
+    public ProductCatalogue loginApplication(String username, String password){
         userEmail.sendKeys(username);
         passwordEle.sendKeys(password);
         submit.click();
+        return new ProductCatalogue(webDriver);
     }
 
+    public String getErrorMessage(){
+        waitForElement(errorMessage,5);
+        return errorMessage.getText();
+    }
     public void navigateToWebPage() {
         webDriver.get("https://rahulshettyacademy.com/client");
     }
+
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.utils.Helpers;
 
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -30,8 +31,13 @@ public class CartPage extends Helpers {
         cartBtn.click();    }
 
 
-    public void verifyAndContinueToCheckOut(String productName) {
-        assertTrue(cartProducts.stream().anyMatch(prod->prod.getText().toLowerCase().contains(productName)));
-        webDriver.findElement(By.cssSelector(".totalRow button")).click();
+    public Boolean verifyAndContinueToCheckOut(String productName) {
+        return cartProducts.stream().anyMatch(prod->prod.getText().toLowerCase().contains(productName));
+
     }
+    public CheckOutPage goToCheckout(String productName){
+        webDriver.findElement(By.cssSelector(".totalRow button")).click();
+        return new CheckOutPage(webDriver);
+    }
+
 }

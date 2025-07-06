@@ -36,7 +36,8 @@ public class CheckOutPage extends Helpers{
         countryBtn.click();
     }
 
-    public void submitOrder() {
+    public ConfirmOrderPage submitOrder() {
         submitOrderBtn.click();
+        return new ConfirmOrderPage(webDriver);
     }
 }

@@ -40,10 +40,13 @@ public class ProductCatalogue extends Helpers {
 
     }
 
-    public void addProductToCart(String productName) {
+    public CartPage addProductToCart(String productName) {
         WebElement prod = getProductByName(productName);
         prod.findElement(addToCartBtn).click();
         waitForElementToDisapper(loadingComponent,5);
-        waitForElementPresent(successToast,0);
+        waitForElementPresent(successToast,5);
+        return new CartPage(webDriver);
     }
+
+
 }
