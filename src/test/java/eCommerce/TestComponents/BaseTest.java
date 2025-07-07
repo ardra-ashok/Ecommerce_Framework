@@ -4,11 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.pageObjects.LandingPage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -37,9 +40,13 @@ public abstract class BaseTest {
 
         if(browserName.equalsIgnoreCase("chrome")) {
             if(webDriver==null) {
+                ChromeOptions options = new ChromeOptions();
+//                options.addArguments("--headless");
+
                 WebDriverManager.chromedriver().setup();
-                webDriver = new ChromeDriver();
+                webDriver = new ChromeDriver(options);
                 webDriver.manage().window().maximize();
+                webDriver.manage().window().setSize(new Dimension(1440,900));
                 webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
                 return webDriver;
             }else{
@@ -49,6 +56,8 @@ public abstract class BaseTest {
         }
         else if(browserName.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
             webDriver = new FirefoxDriver();
             webDriver.manage().window().maximize();
             webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
