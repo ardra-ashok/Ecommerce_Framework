@@ -96,6 +96,6 @@ public abstract class BaseTest {
         File source = ts.getScreenshotAs(OutputType.FILE);
         File file = new File(System.getProperty("user.dir") + "/reports/" + testCaseName + ".png");
         FileUtils.copyFile(source, file);
-        return System.getProperty("user.dir") + "/reports/" + testCaseName + ".png";
+        return testCaseName+".png";
     }
 }

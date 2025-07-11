@@ -34,11 +34,10 @@ public class Listeners extends BaseTest implements ITestListener {
                     .get(result.getInstance());
 
         } catch (Exception e1) {
-            e1.printStackTrace();
+            System.out.println("This is exception: "+e1);
         }
         String filePath = null;
         try {
-
             filePath = getScreenshot(result.getMethod().getMethodName(),webDriver);
             System.out.println(filePath);
         } catch (IOException e) {
