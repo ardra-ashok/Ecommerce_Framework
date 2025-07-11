@@ -8,9 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.utils.Helpers;
 
 import java.util.List;
-import java.util.function.BooleanSupplier;
-
-import static org.testng.AssertJUnit.assertTrue;
 
 public class CartPage extends Helpers {
 

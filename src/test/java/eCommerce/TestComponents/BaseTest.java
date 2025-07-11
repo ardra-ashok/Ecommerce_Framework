@@ -76,9 +76,10 @@ public abstract class BaseTest {
 
     @AfterMethod(alwaysRun=true)
     public void tearDown(){
-        if (webDriver != null)
+        if (webDriver != null) {
             webDriver.quit();
-        webDriver = null;
+            webDriver = null;
+        }
     }
 
     public WebDriver getDriver(){
@@ -98,4 +99,6 @@ public abstract class BaseTest {
         FileUtils.copyFile(source, file);
         return testCaseName+".png";
     }
+
+
 }
